@@ -185,3 +185,49 @@ d3.select('#rootGroup')
   .style('stroke', 'black')
   .style('stroke-width', '1')
   ;
+
+console.log(points.length);
+
+var tr = d3.select('#points')
+  .selectAll('.point-row')
+  .data(points)
+  .enter()
+  .append('tr')
+  .attr('class', 'point-row');
+
+tr.append('td')
+.style('text-align', 'right')
+.html((d, i) => i);
+
+tr.append('td')
+.style('text-align', 'right')
+.html((d) => Math.round(d.x));
+
+tr.append('td')
+.style('text-align', 'right')
+.html((d) => Math.round(d.y));
+
+var variables = [
+ ['r', 'Radius of outer circle.', r],
+ ['s', 'Radius of inner circle.', s], 
+ ['w', 'Width of tooth.', w],
+ ['n', 'Number of teeth.', n]
+];
+
+tr = d3.select('#variables')
+  .selectAll('.variable-row')
+  .data(variables)
+  .enter()
+  .append('tr')
+  .attr('class', 'variable-row');
+
+tr.append('td')
+.html((d) => d[0]);
+
+tr.append('td')
+.html((d) => d[1]);
+
+tr.append('td')
+.style('text-align', 'right')
+.html((d) => d[2]);
+

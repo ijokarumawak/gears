@@ -1,10 +1,34 @@
 <!doctype html>
 <html>
-<body>
-  <svg>
-    <g id="rootGroup" transform="translate(150, 75), scale(1, -1)"></g>
-  </svg>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="gear.js"></script>
-</body>
+  <head>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: x-small;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      border: 1px solid #CCC;
+      padding: 3px;
+    }
+  </style>
+  </head>
+  <body>
+    <h2>Variables</h2>
+    <table id="variables">
+      <tr><th>name</th><th>description</th><th>value</th></tr>
+    </table>
+    <h2>Result Image</h2>
+    <svg>
+      <g id="rootGroup" transform="translate(150, 75), scale(1, -1)"></g>
+    </svg>
+    <h2>Points</h2>
+    <table id="points">
+      <tr><th>i</th><th>x</th><th>y</th></tr>
+    </table>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="gear.js"></script>
+  </body>
 </html>
