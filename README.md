@@ -2,6 +2,8 @@
 
 This project is a graphical application experimentation using D3.js.
 
+![](https://raw.githubusercontent.com/ijokarumawak/gears/master/images/screenshot.png)
+
 - n=4, w=5
 
     ![](https://raw.githubusercontent.com/ijokarumawak/gears/master/images/n4w5.png)
