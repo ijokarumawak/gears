@@ -38,7 +38,7 @@ function cli(a,b,c,x1,y1,r){
 	}
 }
 
-function teeth(theta, w, r) {
+function tooth(theta, w, r) {
   var radT = toRadian(theta);
 
   var p1x = -r * Math.cos(radT);
@@ -95,8 +95,8 @@ var tsr = new Array(n);
 
 for (var i = 0; i < n; i++) {
   var a = d * i;
-  tss[i] = teeth(a, w, s);
-  tsr[i] = teeth(a, w, r);
+  tss[i] = tooth(a, w, s);
+  tsr[i] = tooth(a, w, r);
 }
 
 function toPoints(ts) {
@@ -111,79 +111,12 @@ function toPoints(ts) {
   return points;
 }
 
-
-//var points = toPoints(tss).concat(toPoints(tsr)).sort((p1, p2) => {
-//  return (p1.x - p2.x) + (p1.y - p2.y);
-//});
-// var points = toPoints(tss).concat(toPoints(tsr));
-/*
-var points = toPoints(tss).sort((p1, p2) => {
-  var p1d = Math.atan(p1.y / p1.x);
-  var p2d = Math.atan(p2.y / p2.x);
-  console.log('p1', p1, p1d);
-  console.log('p2', p2, p2d);
-  return p1d - p2d;
-});
-*/
-
 var points = toPoints(tss).concat(toPoints(tsr));
-
-var areas = [
-  new Array(),
-  new Array(),
-  new Array(),
-  new Array()
-];
-
-// Group by areas.
-points.forEach((p) => {
-  var a;
-  if (p.x < 0) {
-    if (p.y < 0) {
-      a = 0;
-    } else {
-      a = 1;
-    }
-  } else {
-    if (p.y < 0) {
-      a = 3;
-    } else {
-      a = 2;
-    }
-  }
-  areas[a].push(p);
-});
-
-var dist = (p1, p2) => Math.sqrt(square(p2.x - p1.x) + square(p2.y - p1.y));
-var origin = new Point(0, 0);
-
-// areas[0].sort((p1, p2) => (dist(p1, origin) - dist(p2, origin)) + (p1.y - p2.y));
-// areas[0].sort((p1, p2) => (dist(p1, origin) - dist(p2, origin)) + (p1.x - p2.x) + (p1.y - p2.y));
-/*
-areas[0].sort((p1, p2) => {
-  if (dist(p1, origin) - dist(p2, origin) < 0) {
-    return -1;
-  }
-  return (p1.x - p2.x) + (p1.y - p2.y);
-});
-*/
-areas[0].sort((p1, p2) => (dist(p1, origin) - dist(p2, origin)) + (p1.y - p2.y));
-areas[1].sort((p1, p2) => (p1.x - p2.x) + (p1.y - p2.y));
-areas[2].sort((p1, p2) => (p2.y - p1.y) + (p1.x - p2.x));
-areas[3].sort((p1, p2) => (p2.x - p1.x) + Math.abs(p1.y) - Math.abs(p2.y));
-
-var sortedPoints = new Array();
-areas.forEach((points) => {
-  points.forEach((p) => {
-    sortedPoints.push(p);
-  });
-});
-console.log(sortedPoints);
 
 // Draw points
 d3.select('#rootGroup')
   .selectAll('.point')
-  .data(sortedPoints)
+  .data(points)
   .enter()
   .append('circle')
   .attr('class', 'point')
